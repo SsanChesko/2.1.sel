@@ -161,16 +161,16 @@ class ChromeTest {
         String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText();
         String expected = "Поле обязательно для заполнения";
         assertEquals(expected, actual);
-}
+    }
 
-@Test
+    @Test
     void shouldTestCheckbox() {
-    driver.get("http://localhost:9999/");
-    driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
-    driver.findElement(By.cssSelector("[type='tel']")).sendKeys("");
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("");
 //    driver.findElement(By.cssSelector(".checkbox__box")).click();
-    driver.findElement(By.cssSelector("button")).click();
-    String actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].checkbox .checkbox__text")).getText();
-    String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
-}
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].checkbox .checkbox__text")).getText();
+        String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
+    }
 }
