@@ -78,8 +78,6 @@ class ChromeTest {
     @Test
     void shouldTestForm() {
         driver.get("http://localhost:9999/");
-//        driver.findElement().sendKeys("Иванов Иван");
-//        driver.findElement().sendKeys("+79028383000");
         List<WebElement> textFields = driver.findElements(By.className("input__control"));
         textFields.get(0).sendKeys("Иванов Иван");
         textFields.get(1).sendKeys("+79028383000");
@@ -172,5 +170,7 @@ class ChromeTest {
         driver.findElement(By.cssSelector("button")).click();
         String actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].checkbox .checkbox__text")).getText();
         String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
+
+        assertEquals(expected, actual);
     }
 }
