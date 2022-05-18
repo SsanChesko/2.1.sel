@@ -54,10 +54,10 @@ class ChromeTest {
 
     WebDriver driver;
 
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+//    @BeforeAll
+//    static void setupClass() {
+//        WebDriverManager.chromedriver().setup();
+//    }
 
     @BeforeEach
     void setupTest() {
@@ -138,15 +138,39 @@ class ChromeTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void shouldTestSecondField() {
-//        driver.get("http://localhost:9999/");
-//        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
-//        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+790283830000");
-//        driver.findElement(By.cssSelector(".checkbox__box")).click();
-//        driver.findElement(By.cssSelector("button")).click();
-//        String actual = driver.findElement(By.cssSelector(".input_invalid")).getText();
-//        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldTestSecondField() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+790283830000");
+        driver.findElement(By.cssSelector(".checkbox__box")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        List<WebElement> textFields = driver.findElements(By.cssSelector(".input__sub"));
+        String actual = textFields.get(1).getText();
+        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldTestSecondFieldNothing() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("");
+        driver.findElement(By.cssSelector(".checkbox__box")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText();
+        String expected = "Поле обязательно для заполнения";
+        assertEquals(expected, actual);
+}
+
+@Test
+    void shouldTestCheckbox() {
+    driver.get("http://localhost:9999/");
+    driver.findElement(By.cssSelector("[type='text']")).sendKeys("Иванов Иван");
+    driver.findElement(By.cssSelector("[type='tel']")).sendKeys("");
+//    driver.findElement(By.cssSelector(".checkbox__box")).click();
+    driver.findElement(By.cssSelector("button")).click();
+    String actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].checkbox .checkbox__text")).getText();
+    String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
+}
 }
