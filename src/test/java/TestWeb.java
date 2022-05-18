@@ -54,10 +54,10 @@ class ChromeTest {
 
     WebDriver driver;
 
-//    @BeforeAll
-//    static void setupClass() {
-//        WebDriverManager.chromedriver().setup();
-//    }
+    @BeforeAll
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeEach
     void setupTest() {
